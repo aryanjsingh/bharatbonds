@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getCurrentUser } from "@/data/users";
+import { getCurrentUser, User, users as defaultUsers } from "@/data/users";
 
 export default function Navbar() {
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
-    const user = getCurrentUser();
+    // Initialize with default (seed) user to match server-side rendering
+    const [user, setUser] = useState<User>(defaultUsers[0]);
     const router = useRouter();
 
     const notificationRef = useRef<HTMLDivElement>(null);
@@ -36,6 +37,9 @@ export default function Navbar() {
         // precise check for auth
         const loggedIn = localStorage.getItem("isLoggedIn");
         setIsLoggedIn(!!loggedIn);
+        if (loggedIn) {
+            setUser(getCurrentUser());
+        }
 
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
@@ -115,17 +119,23 @@ export default function Navbar() {
                                 )}
                             </div>
 
-                            {/* Profile Button */}
+                            {/* Profile / Wallet Button */}
                             <div className="relative" ref={profileRef}>
                                 <button
                                     onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                    className="size-10 rounded-full border-2 border-[#2c3928] p-0.5 hover:border-primary transition-colors overflow-hidden"
+                                    className="flex items-center gap-3 bg-[#1e2b1a] hover:bg-[#2c3928] border border-[#2c3928] rounded-full p-1 pr-4 transition-all group cursor-pointer"
                                 >
-                                    <img
-                                        alt="User"
-                                        className="w-full h-full rounded-full object-cover"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3NnUm93N6V79aHsCSCA1I9hVsnj59jElM9B7gSyg2DCIev_vXJrXUDQ57nJeVJ2ENWR_mJhyTVtmQdCy6tJee0TCUDhdZzgz0eMT1qD5TLuB0EsKAfGSTy8uaxpVznkpHpysOtofnPu5sPjZrSFH9reaPK-QZg1K-dbz4xGDz8JB2k6_S9dBnnK7DnALcG8WURZ9mSBUwTaNG_S2Dr_R8wBcxHCIYN0fqW9Fd7mdzzGzpWDR9XCrFVqzZt2h7BZJHVzbgJ2VSotDA"
-                                    />
+                                    <div className="size-8 rounded-full bg-gradient-to-tr from-primary to-emerald-600 flex items-center justify-center text-[#131811] font-bold shadow-lg group-hover:scale-105 transition-transform">
+                                        {user.name.charAt(0)}
+                                    </div>
+                                    <div className="flex flex-col items-start">
+                                        <span className="text-white text-xs font-bold leading-none mb-0.5">{user.name}</span>
+                                        <span className="text-[#a3b99d] text-[10px] font-mono leading-none flex items-center gap-1">
+                                            <span className="size-1.5 rounded-full bg-primary animate-pulse"></span>
+                                            0x71...3A2F
+                                        </span>
+                                    </div>
+                                    <span className="material-symbols-outlined text-[#a3b99d] group-hover:text-white transition-colors text-[18px]">expand_more</span>
                                 </button>
 
                                 {isProfileOpen && (

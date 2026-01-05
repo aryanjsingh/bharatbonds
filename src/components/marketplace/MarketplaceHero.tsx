@@ -23,8 +23,8 @@ export default function MarketplaceHero() {
                     <div className="flex w-full items-center rounded-full bg-white dark:bg-card-dark p-2 pl-6 shadow-xl focus-within:border-primary transition-colors">
                         <span className="material-symbols-outlined text-text-secondary">search</span>
                         <input
-                            className="w-full bg-transparent px-4 py-2 text-slate-900 dark:text-white focus:outline-none "
-                            placeholder="Try 'Karnataka SDL' or '91 Day T-Bill'"
+                            className="w-full bg-transparent px-4 py-2 text-slate-900 dark:text-white !border-none !outline-none !shadow-none !ring-0 focus:border-none focus:outline-none focus:ring-0 placeholder:text-text-secondary"
+                            placeholder="Search by Token Symbol (e.g. MAH-SDL-24), Name, or Network"
                         />
                         <button className="bg-primary hover:bg-primary/90 text-[#131811] px-6 py-3 rounded-full font-bold transition-transform active:scale-95">
                             Search

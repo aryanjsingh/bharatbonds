@@ -3,9 +3,9 @@ export default function PopularPacks() {
         <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-24">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
-                    <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Bharat Marketplace</span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white">Curated Packs for Every Goal</h2>
-                    <p className="text-[#a3b99d] mt-4 max-w-xl">Bonds can be confusing. We've simplified them into easy-to-understand packs tailored for your timeline.</p>
+                    <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Tokenized Assets</span>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white">Trending On-Chain Bonds</h2>
+                    <p className="text-[#a3b99d] mt-4 max-w-xl">Limited supply Real World Assets (RWAs) available for minting.</p>
                 </div>
                 <a className="text-white hover:text-primary font-bold flex items-center gap-2 transition-colors" href="/marketplace">
                     View All Packs <span className="material-symbols-outlined">arrow_forward</span>

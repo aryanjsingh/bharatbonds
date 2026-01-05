@@ -1,7 +1,13 @@
-import { getCurrentUser } from "@/data/users";
+"use client";
+import { getCurrentUser, User, users as defaultUsers } from "@/data/users";
+import { useEffect, useState } from "react";
 
 export default function WealthHero() {
-    const user = getCurrentUser();
+    const [user, setUser] = useState<User>(defaultUsers[0]);
+
+    useEffect(() => {
+        setUser(getCurrentUser());
+    }, []);
 
     return (
         <section className="relative overflow-hidden rounded-2xl bg-[#1e2b1a] border border-[#2c3928] p-8 group">
@@ -10,18 +16,18 @@ export default function WealthHero() {
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2 text-[#a3b99d] mb-1">
-                        <span className="material-symbols-outlined text-[18px]">account_balance_wallet</span>
-                        <span className="text-sm font-medium uppercase tracking-wider">Total Wealth</span>
+                        <span className="material-symbols-outlined text-[18px]">token</span>
+                        <span className="text-sm font-medium uppercase tracking-wider">Token Portfolio Value</span>
                     </div>
                     <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight flex items-baseline gap-1">
-                        <span className="text-3xl md:text-4xl font-bold text-[#a3b99d]">₹</span>{user.investedBalance.toLocaleString('en-IN')}
+                        <span className="text-3xl md:text-4xl font-bold text-[#a3b99d]">₹</span>{user.tokenBalanceValue?.toLocaleString('en-IN') || 0}
                     </h1>
                     <div className="flex items-center gap-3 mt-2">
                         <span className="inline-flex items-center gap-1 bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold border border-primary/20 animate-pulse">
                             <span className="material-symbols-outlined text-[14px]">trending_up</span>
-                            Live: +₹12.40 today
+                            On-Chain Yield: +12.4%
                         </span>
-                        <span className="text-[#a3b99d] text-sm">Weighted Avg Yield: <span className="text-white font-bold">7.4%</span></span>
+                        <span className="text-[#a3b99d] text-sm">Weighted Avg APY: <span className="text-white font-bold">7.4%</span></span>
                     </div>
                 </div>
                 <div className="flex gap-3 w-full md:w-auto">

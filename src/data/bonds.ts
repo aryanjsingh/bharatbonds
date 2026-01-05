@@ -1,66 +1,109 @@
-export type BondType = 'T-Bills' | 'G-Secs' | 'SDLs';
+export type BondType = 'T-Bills' | 'G-Secs' | 'SDLs' | 'Gold';
 
 export interface Bond {
     id: string;
     title: string;
     type: BondType;
     description: string;
-    yield: string;
-    maturity: string;
-    minInvestment: string;
-    icon: string; // Material symbol name
-    accentColor: string; // Tailwind color class for icon background/text
-    tagColor: string; // Tailwind classes for the tag
-    gradientFrom: string; // Hex color for gradient start
-    gradientTo: string; // Hex color for gradient end
-    backgroundImage?: string; // Optional background image
-    stateName?: string; // Optional state name for SDLs
+    minInvestment: number; // Mint Price per Token
+    returns: string;      // Yield / APY
+    duration: string;     // Lock-in / Maturity
+    riskLevel: "Low" | "Medium" | "High"; // Risk Profile
+    tags: string[];
+
+    // Crypto / RWA Specific Fields
+    tokenSymbol: string;      // e.g., MAH-SDL-24
+    network: "Polygon" | "Solana" | "Ethereum";
+    tokenAddress: string;     // Mock contract address
+    totalSupply: number;      // Total tokens minted
+    soldAmount: number;       // Tokens currently sold
+    apy: number;              // Numeric APY for calculations
 }
 
 export const bondData: Bond[] = [
     {
-        id: 'starter-pack',
-        title: 'The Starter Pack',
-        type: 'T-Bills',
-        description: 'Perfect for beginners. Short duration treasury bills that mature in just 3 months.',
-        yield: '6.8%',
-        maturity: '91 Days',
-        minInvestment: '₹100',
-        icon: 'rocket_launch',
-        accentColor: 'text-[#46ec13]',
-        tagColor: 'bg-blue-500/10 text-blue-400 border border-blue-500/20',
-        gradientFrom: '#1e271c',
-        gradientTo: '#2c3928',
-        backgroundImage: 'radial-gradient(#46ec13 1px, transparent 1px)'
+        id: "1",
+        title: "Maharashtra SDL 2024",
+        type: "SDLs",
+        tokenSymbol: "MAH-24",
+        description: "State Development Loan backed by the Govt of Maharashtra. High safety, fixed yield.",
+        minInvestment: 1000,
+        returns: "7.6%",
+        apy: 7.6,
+        duration: "3 Years",
+        riskLevel: "Low",
+        tags: ["State Govt", "High Yield", "Tax Efficient"],
+        network: "Polygon",
+        tokenAddress: "0x71C...9A21",
+        totalSupply: 50000,
+        soldAmount: 42500, // 85% Sold
     },
     {
-        id: 'long-term-giant',
-        title: 'The Long-Term Giant',
-        type: 'G-Secs',
-        description: 'Lock in high interest rates for a decade. Ideal for long-term goal planning.',
-        yield: '7.2%',
-        maturity: '10 Years',
-        minInvestment: '₹100',
-        icon: 'savings',
-        accentColor: 'text-[#46ec13]',
-        tagColor: 'bg-purple-500/10 text-purple-400 border border-purple-500/20',
-        gradientFrom: '#1e271c',
-        gradientTo: '#2c3928'
+        id: "2",
+        title: "91 Day T-Bill",
+        type: "T-Bills",
+        tokenSymbol: "TBILL-91D",
+        description: "Short term treasury bill issued by RBI. The safest instrument in the country.",
+        minInvestment: 500,
+        returns: "6.8%",
+        apy: 6.8,
+        duration: "91 Days",
+        riskLevel: "Low",
+        tags: ["Central Govt", "Short Term", "Liquid"],
+        network: "Solana",
+        tokenAddress: "So11...TBill",
+        totalSupply: 100000,
+        soldAmount: 12000, // 12% Sold
     },
     {
-        id: 'state-growth',
-        title: 'State Growth',
-        type: 'SDLs',
-        description: 'Support state development projects and earn higher yields than central bonds.',
-        yield: '7.6%',
-        maturity: '7 Years',
-        minInvestment: '₹100',
-        icon: 'apartment',
-        accentColor: 'text-[#46ec13]',
-        tagColor: 'bg-orange-500/10 text-orange-400 border border-orange-500/20',
-        gradientFrom: '#1e271c',
-        gradientTo: '#2c3928',
-        backgroundImage: "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cpath d=\\'M50 0 L100 50 L50 100 L0 50 Z\\' fill=\\'rgba(70, 236, 19, 0.05)\\' /%3E%3C/svg%3E')",
-        stateName: 'Maharashtra'
+        id: "3",
+        title: "NHAI Tax-Free Bond",
+        type: "G-Secs", // Using G-Secs as a catch-all for central/psu for now
+        tokenSymbol: "NHAI-TF",
+        description: "Infrastructure bond by National Highways Authority of India. Interest is tax-free.",
+        minInvestment: 5000,
+        returns: "5.4%",
+        apy: 5.4,
+        duration: "10 Years",
+        riskLevel: "Low",
+        tags: ["PSU Bond", "Tax Free", "Long Term"],
+        network: "Ethereum",
+        tokenAddress: "0x88B...TaxF",
+        totalSupply: 25000,
+        soldAmount: 24800, // Almost Sold Out
+    },
+    {
+        id: "4",
+        title: "Sovereign Gold Bond",
+        type: "Gold",
+        tokenSymbol: "SGB-2024-I",
+        description: "Tokenized Gold Bond. Returns linked to gold price + 2.5% fixed interest.",
+        minInvestment: 100,
+        returns: "Gold + 2.5%",
+        apy: 12.5, // Assumed historical avg
+        duration: "8 Years",
+        riskLevel: "Medium",
+        tags: ["Gold", "Commodity", "Hedge"],
+        network: "Polygon",
+        tokenAddress: "0xGLD...2024",
+        totalSupply: 10000,
+        soldAmount: 6500,
+    },
+    {
+        id: "5",
+        title: "Green Energy bond",
+        type: "G-Secs",
+        tokenSymbol: "GRN-PWR-28",
+        description: "Fund renewable energy projects. backed by IREDA.",
+        minInvestment: 2000,
+        returns: "7.1%",
+        apy: 7.1,
+        duration: "5 Years",
+        riskLevel: "Low",
+        tags: ["ESG", "Green", "PSU"],
+        network: "Polygon",
+        tokenAddress: "0xGRN...ENGY",
+        totalSupply: 75000,
+        soldAmount: 15000,
     }
 ];

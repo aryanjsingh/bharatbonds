@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
-import { users } from "@/data/users";
+import { getAllUsers } from "@/data/users";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -17,14 +17,16 @@ export default function LoginForm() {
         e.preventDefault();
         setError("");
 
-        // Find user matching credentials
-        const user = users.find(u =>
+        // Find user matching credentials from all sources
+        const allUsers = getAllUsers();
+        const user = allUsers.find(u =>
             (u.email === email || u.uid === email) && u.password === password
         );
 
         if (user) {
-            // Set simple auth flag
+            // Set simple auth flag AND the specific user identifier
             localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("loggedInUserEmail", user.email);
             router.push("/dashboard");
         } else {
             setError("Invalid email or password");
