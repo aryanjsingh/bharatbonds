@@ -75,6 +75,33 @@ export const getCurrentUser = (): User => {
     return user || seedUsers[0];
 };
 
+// Update balance for the current user
+export const updateUserBalance = (addAmount: number): User | null => {
+    if (typeof window === "undefined") return null;
+
+    const loggedInEmail = localStorage.getItem("loggedInUserEmail");
+    if (!loggedInEmail) return null;
+
+    const storedUsersJson = localStorage.getItem("bharatbonds_users");
+    let storedUsers: User[] = storedUsersJson ? JSON.parse(storedUsersJson) : [];
+
+    // Check if the user is in localStorage
+    const userIndex = storedUsers.findIndex(u => u.email === loggedInEmail);
+
+    if (userIndex !== -1) {
+        // Update user in localStorage
+        storedUsers[userIndex].accountBalance += addAmount;
+        localStorage.setItem("bharatbonds_users", JSON.stringify(storedUsers));
+        return storedUsers[userIndex];
+    } else {
+        // If it's a seed user, we can't persistent-save to seedUsers array in code, 
+        // but we can "convert" them to a local user for session persistence or just alert.
+        // For prototype, let's just allow it for session if it's not in localStorage yet,
+        // or better yet, just treat it as a mock for all.
+        return null;
+    }
+};
+
 // Backward compatibility (deprecated, use getAllUsers instead)
 export const users = seedUsers;
 
