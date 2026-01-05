@@ -8,7 +8,7 @@ declare global {
     }
 }
 
-const AMOY_CHAIN_ID = '0x13882'; // 80002 decimal
+const SEPOLIA_CHAIN_ID = '0xaa36a7'; // 11155111 decimal
 
 export default function WealthHero() {
     const [user, setUser] = useState<User>(defaultUsers[0]);
@@ -48,7 +48,7 @@ export default function WealthHero() {
         try {
             await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
-                params: [{ chainId: AMOY_CHAIN_ID }],
+                params: [{ chainId: SEPOLIA_CHAIN_ID }],
             });
         } catch (switchError: any) {
             // If the chain hasn't been added to MetaMask
@@ -57,11 +57,11 @@ export default function WealthHero() {
                     await window.ethereum.request({
                         method: 'wallet_addEthereumChain',
                         params: [{
-                            chainId: AMOY_CHAIN_ID,
-                            chainName: 'Polygon Amoy Testnet',
-                            nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-                            rpcUrls: ['https://rpc-amoy.polygon.technology/'],
-                            blockExplorerUrls: ['https://amoy.polygonscan.com/']
+                            chainId: SEPOLIA_CHAIN_ID,
+                            chainName: 'Ethereum Sepolia Testnet',
+                            nativeCurrency: { name: 'SepoliaETH', symbol: 'ETH', decimals: 18 },
+                            rpcUrls: ['https://rpc.sepolia.org'],
+                            blockExplorerUrls: ['https://sepolia.etherscan.io']
                         }],
                     });
                 } catch (addError) {
@@ -81,8 +81,8 @@ export default function WealthHero() {
                 setWalletAddress(accounts[0]);
                 setChainId(currentChainId);
 
-                if (currentChainId !== AMOY_CHAIN_ID) {
-                    const confirmSwitch = confirm("Please switch to Polygon Amoy Testnet for this prototype.");
+                if (currentChainId !== SEPOLIA_CHAIN_ID) {
+                    const confirmSwitch = confirm("Please switch to Ethereum Sepolia Testnet for this prototype.");
                     if (confirmSwitch) await switchNetwork();
                 }
 
@@ -104,7 +104,7 @@ export default function WealthHero() {
             return;
         }
 
-        if (chainId !== AMOY_CHAIN_ID) {
+        if (chainId !== SEPOLIA_CHAIN_ID) {
             await switchNetwork();
             return;
         }
@@ -123,7 +123,7 @@ export default function WealthHero() {
             const updatedUser = updateUserBalance(amount);
             if (updatedUser) {
                 setUser(updatedUser);
-                alert(`Success! ₹${amount} added after validating on Polygon Amoy Testnet.`);
+                alert(`Success! ₹${amount} added after validating on Ethereum Sepolia.`);
             } else {
                 alert("Only registered accounts can add funds. Please log in with a new account.");
             }
@@ -158,15 +158,15 @@ export default function WealthHero() {
                         <div className="flex flex-col">
                             <span className="text-[10px] text-[#a3b99d] uppercase font-bold tracking-widest">Network Status</span>
                             <span className="text-sm font-bold flex items-center gap-1.5 mt-0.5">
-                                {chainId === AMOY_CHAIN_ID ? (
+                                {chainId === SEPOLIA_CHAIN_ID ? (
                                     <span className="text-primary flex items-center gap-1.5">
                                         <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-                                        Amoy Testnet (Verified)
+                                        Sepolia Testnet (Verified)
                                     </span>
                                 ) : (
                                     <span className="text-red-400 flex items-center gap-1.5">
                                         <span className="size-2 rounded-full bg-red-400"></span>
-                                        {walletAddress ? "Switch to Testnet" : "Wallet Disconnected"}
+                                        {walletAddress ? "Switch to Sepolia" : "Wallet Disconnected"}
                                     </span>
                                 )}
                             </span>
