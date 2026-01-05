@@ -2,12 +2,54 @@
 import { getCurrentUser, User, users as defaultUsers } from "@/data/users";
 import { useEffect, useState } from "react";
 
+declare global {
+    interface Window {
+        ethereum?: any;
+    }
+}
+
 export default function WealthHero() {
     const [user, setUser] = useState<User>(defaultUsers[0]);
+    const [isConnecting, setIsConnecting] = useState(false);
+    const [walletAddress, setWalletAddress] = useState<string | null>(null);
 
     useEffect(() => {
         setUser(getCurrentUser());
+
+        // Check if already connected
+        const checkConnection = async () => {
+            if (typeof window.ethereum !== 'undefined') {
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                if (accounts.length > 0) {
+                    setWalletAddress(accounts[0]);
+                }
+            }
+        };
+        checkConnection();
     }, []);
+
+    const connectWallet = async () => {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                setIsConnecting(true);
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                setWalletAddress(accounts[0]);
+                alert("Wallet Connected: " + accounts[0]);
+            } catch (error) {
+                console.error("User denied account access", error);
+                alert("Connection failed. Please allow account access.");
+            } finally {
+                setIsConnecting(false);
+            }
+        } else {
+            alert("MetaMask not found. Please install MetaMask to add funds via crypto.");
+            window.open('https://metamask.io/download/', '_blank');
+        }
+    };
+
+    const formatAddress = (addr: string) => {
+        return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`;
+    };
 
     return (
         <section className="relative overflow-hidden rounded-2xl bg-[#1e2b1a] border border-[#2c3928] p-8 group">
@@ -35,12 +77,17 @@ export default function WealthHero() {
                         <span className="material-symbols-outlined text-[20px]">history</span>
                         History
                     </button>
-                    <button className="flex-1 md:flex-none h-12 px-6 bg-primary hover:bg-primary-dark text-black rounded-full font-bold text-sm transition-all shadow-[0_0_15px_rgba(70,236,19,0.3)] hover:shadow-[0_0_25px_rgba(70,236,19,0.5)] flex items-center justify-center gap-2">
-                        <span className="material-symbols-outlined text-[20px]">add</span>
-                        Add Funds
+                    <button
+                        onClick={connectWallet}
+                        disabled={isConnecting}
+                        className="flex-1 md:flex-none h-12 px-6 bg-primary hover:bg-primary-dark text-black rounded-full font-bold text-sm transition-all shadow-[0_0_15px_rgba(70,236,19,0.3)] hover:shadow-[0_0_25px_rgba(70,236,19,0.5)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    >
+                        <span className="material-symbols-outlined text-[20px]">{walletAddress ? 'account_balance_wallet' : 'add'}</span>
+                        {isConnecting ? "Connecting..." : walletAddress ? formatAddress(walletAddress) : "Add Funds (via MetaMask)"}
                     </button>
                 </div>
             </div>
         </section>
     );
 }
+
