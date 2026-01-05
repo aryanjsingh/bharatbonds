@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BharatBonds: Tokenized Government Bonds (RWA)
 
-## Getting Started
+**East-India Blockchain Summit 2.0 Selection Round Prototype**
 
-First, run the development server:
+BharatBonds is a decentralized platform concept designed to tokenize Indian Government Bonds (RWAs) to make them accessible, liquid, and transparent for a new generation of investors.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🔗 Live Demo
+The prototype is hosted for judges at: [https://bharatbonds.vercel.app/](https://bharatbonds.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ⚠️ Disclaimer: Prototype Only
+This application is a **high-fidelity prototype** built specifically for the selection round of the **East-India Blockchain Summit 2.0**. 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Security Note**: This is a demonstration model. The application has security flows designed for ease of judging and is **not meant for production**. 
+- **Database**: This app **does not use a proper production-grade database** (e.g., PostgreSQL, MongoDB). It utilizes a **Model Database** approach (LocalStorage & Static Seeds) to simulate a real environment without the overhead of a cloud backend. **Please do not use real-world passwords.**
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 🛠️ Tech Stack
+- **Framework**: Next.js 15 (App Router)
+- **Library**: React 19
+- **Styling**: Tailwind CSS (v4), Custom Dark Theme
+- **Language**: TypeScript
+- **Icons**: Material Symbols (Google Fonts)
+- **Storage**: LocalStorage Persistence (Mock DB)
+- **Deployment**: Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🪙 Key Implementation Details
+- **Crypto Integration**: Terminology and workflows are designed around Web3 concepts (Minting, Wallets, On-chain Yield).
+- **Crypto APIs**: Crypto-related APIs and data structures were used to model the tokenization of Real World Assets (RWAs).
+- **Fractional Ownership**: Prototype demonstrates the ability to mint micro-units of high-value sovereign bonds.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built for **East-India Blockchain Summit 2.0**.
