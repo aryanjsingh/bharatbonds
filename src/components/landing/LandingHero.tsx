@@ -37,11 +37,11 @@ export default function LandingHero() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary/10 rounded-full blur-[120px] opacity-50 animate-pulse"></div>
 
                 {/* Main Animation/Image Container */}
-                <div className="relative z-10 transform transition-all duration-700 hover:scale-[1.05] hover:rotate-1">
+                <div className="relative z-10 transform transition-all duration-700 hover:scale-[1.05]">
                     <img
                         src="/hero-animation.png"
                         alt="BharatBonds Animation"
-                        className="w-full h-auto drop-shadow-[0_0_50px_rgba(70,236,19,0.2)] rounded-3xl"
+                        className="w-full h-auto mix-blend-screen"
                     />
 
                     {/* Overlaying the Wealth Card as a floating element for depth */}
