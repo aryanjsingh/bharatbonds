@@ -33,45 +33,42 @@ export default function LandingHero() {
                     <p>Trusted by <span className="text-white font-bold">10,000+</span> students across India</p>
                 </div>
             </div>
-            <div className="relative">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl opacity-30"></div>
-                <div className="relative z-10 transform transition-transform duration-500 hover:scale-[1.02]">
-                    <div className="bg-[#1e2b1a] border border-[#2c3928] rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-                        <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
-                        <div className="flex justify-between items-start mb-8">
-                            <div>
-                                <p className="text-[#a3b99d] text-sm font-medium uppercase tracking-wider mb-2">Total Wealth</p>
-                                <h3 className="text-5xl font-black text-white flex items-baseline gap-1">
-                                    <span className="text-3xl text-[#a3b99d]">₹</span>24,500
-                                </h3>
-                                <div className="inline-flex items-center gap-1 bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold mt-3">
-                                    <span className="material-symbols-outlined text-[14px]">trending_up</span>
-                                    +12.4% Annualized
-                                </div>
+            <div className="relative group">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary/10 rounded-full blur-[120px] opacity-50 animate-pulse"></div>
+
+                {/* Main Animation/Image Container */}
+                <div className="relative z-10 transform transition-all duration-700 hover:scale-[1.05] hover:rotate-1">
+                    <img
+                        src="/hero-animation.png"
+                        alt="BharatBonds Animation"
+                        className="w-full h-auto drop-shadow-[0_0_50px_rgba(70,236,19,0.2)] rounded-3xl"
+                    />
+
+                    {/* Overlaying the Wealth Card as a floating element for depth */}
+                    <div className="absolute -bottom-10 -left-10 bg-[#1e2b1a]/90 backdrop-blur-xl border border-[#2c3928] rounded-2xl p-6 shadow-2xl hidden md:block animate-float">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <span className="material-symbols-outlined">payments</span>
                             </div>
-                            <div className="size-12 rounded-full bg-[#2c3928] flex items-center justify-center">
-                                <span className="material-symbols-outlined text-primary">account_balance_wallet</span>
+                            <div>
+                                <p className="text-[10px] text-[#a3b99d] font-bold uppercase">Recent Mint</p>
+                                <p className="text-white font-bold">140.5 MAH-24</p>
                             </div>
                         </div>
-                        <div className="h-32 flex items-end justify-between gap-2 opacity-80">
-                            <div className="w-full bg-[#2c3928] rounded-t-lg h-[40%]"></div>
-                            <div className="w-full bg-[#2c3928] rounded-t-lg h-[55%]"></div>
-                            <div className="w-full bg-[#2c3928] rounded-t-lg h-[45%]"></div>
-                            <div className="w-full bg-[#2c3928] rounded-t-lg h-[70%]"></div>
-                            <div className="w-full bg-gradient-to-t from-primary/50 to-primary rounded-t-lg h-[90%] relative group cursor-pointer">
-                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                    Current
-                                </div>
-                            </div>
+                        <div className="w-48 h-1 bg-[#2c3928] rounded-full overflow-hidden">
+                            <div className="bg-primary h-full w-2/3"></div>
                         </div>
                     </div>
-                    <div className="absolute -bottom-6 -right-4 bg-[#142210] border border-[#2c3928] p-4 rounded-xl shadow-xl flex items-center gap-3 animate-bounce" style={{ animationDuration: "3s" }}>
-                        <div className="size-10 rounded-full bg-green-900/50 flex items-center justify-center text-primary">
-                            <span className="material-symbols-outlined">payments</span>
-                        </div>
-                        <div>
-                            <p className="text-xs text-[#a3b99d]">Next Payout</p>
-                            <p className="text-white font-bold">₹840 Credit</p>
+
+                    <div className="absolute -top-10 -right-10 bg-[#1e2b1a]/90 backdrop-blur-xl border border-[#2c3928] rounded-2xl p-6 shadow-2xl hidden md:block animate-float" style={{ animationDelay: "1s" }}>
+                        <div className="flex items-center gap-3">
+                            <div className="size-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                <span className="material-symbols-outlined">verified</span>
+                            </div>
+                            <div>
+                                <p className="text-[10px] text-[#a3b99d] font-bold uppercase">On-Chain</p>
+                                <p className="text-white font-bold">Sepolia Verified</p>
+                            </div>
                         </div>
                     </div>
                 </div>
